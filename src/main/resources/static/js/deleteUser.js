@@ -26,7 +26,7 @@ function openDeleteUserPopup(userId) {
         })
         .catch(error => {
             console.error('Ошибка при загрузке данных пользователя:', error);
-            alert('Ошибка при загрузке данных пользователя');
+            // alert('Ошибка при загрузке данных пользователя');
         });
 }
 
@@ -48,6 +48,6 @@ document.getElementById('deleteUserForm').addEventListener('submit', function (e
         })
         .catch(error => {
             console.error('Ошибка при удалении пользователя:', error);
-            alert('Ошибка при удалении пользователя: ' + error.message);
+            // alert('Ошибка при удалении пользователя: ' + error.message);
         });
 });

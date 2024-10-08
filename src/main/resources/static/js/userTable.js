@@ -35,7 +35,7 @@ function fetchUsers() {
         })
         .catch(error => {
             console.error('Error fetching users:', error);
-            alert('Ошибка при загрузке пользователей');
+            // alert('Ошибка при загрузке пользователей');
         });
 }
 
@@ -77,7 +77,7 @@ function loadRoles() {
         })
         .catch(error => {
             console.error('Error loading roles:', error);
-            alert('Ошибка при загрузке ролей');
+            // alert('Ошибка при загрузке ролей');
         });
 }
 

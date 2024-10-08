@@ -18,5 +18,6 @@ public interface UserService {
 
     User findByEmail(String email);
 
-}
+    boolean existsById(Long userId);
 
+}

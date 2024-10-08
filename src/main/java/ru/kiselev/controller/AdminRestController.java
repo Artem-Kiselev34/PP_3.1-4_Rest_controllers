@@ -11,6 +11,7 @@ import ru.kiselev.model.Role;
 import ru.kiselev.model.User;
 import ru.kiselev.service.UserService;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.HashMap;
@@ -72,6 +73,7 @@ public class AdminRestController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
+
     @PutMapping("/users/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @Valid @RequestBody User user, BindingResult result) {
         if (id == null || !id.equals(user.getId())) {
@@ -85,6 +87,9 @@ public class AdminRestController {
             return ResponseEntity.badRequest().body(errors);
         }
         try {
+            if (!userService.existsById(id)) {
+                throw new EntityNotFoundException("Пользователь с ID " + id + " не найден");
+            }
             userService.updateUser(id, user);
         } catch (DataIntegrityViolationException e) {
             result.rejectValue("email", "error.user", "Учетная запись для этого Email уже существует.");
@@ -99,9 +104,13 @@ public class AdminRestController {
 
     @DeleteMapping("/users/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
+        if (!userService.existsById(id)) {
+            throw new EntityNotFoundException("Пользователь с ID " + id + " не найден");
+        }
         userService.deleteUser(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
 
     @GetMapping("users/roles")
     public ResponseEntity<List<Role>> getAllRoles() {

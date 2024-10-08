@@ -23,7 +23,7 @@ function openEditUserPopup(userId) {
         })
         .catch(error => {
             console.error('Error fetching user:', error);
-            alert('Ошибка при загрузке данных пользователя');
+            // alert('Ошибка при загрузке данных пользователя');
         });
 }
 

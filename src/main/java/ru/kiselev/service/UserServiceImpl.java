@@ -11,10 +11,6 @@ import ru.kiselev.model.User;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.dao.DataIntegrityViolationException;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,9 +24,6 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
-    @PersistenceContext
-    private EntityManager em;
 
     @Override
     @Transactional
@@ -90,6 +83,9 @@ public class UserServiceImpl implements UserService {
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+    @Override
+    public boolean existsById(Long userId) {
+        return userRepository.existsById(userId);
+    }
 }
-
-

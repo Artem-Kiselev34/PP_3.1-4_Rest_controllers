@@ -10,4 +10,5 @@ import ru.kiselev.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     @EntityGraph(attributePaths = {"roles"})
     User findByEmail(String email);
+    boolean existsById(Long id);
 }

@@ -23,11 +23,11 @@ public class Role implements GrantedAuthority {
     @Column(name = "id")
     private Long id;
     @Column(name = "name")
-    String name;
+    private String name;
 
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
-    List<User> users;
+    private List<User> users;
 
     public Role() {
     }
